@@ -189,17 +189,13 @@ export default function CartPage() {
                                     </thead>
                                     <tbody>
                                     {products.map(product => (
-                                        // eslint-disable-next-line react/jsx-key
-                                        <tr key={product._id}>
-                                            <td>
-                                                <ProductInfoCell>
-                                                    <ProductImageBox>
-                                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                        <img src={product.images[0]} alt=""/>
-                                                    </ProductImageBox>
-                                                    {product.title}
-                                                </ProductInfoCell>
-                                            </td>
+                                        <tr>
+                                            <ProductInfoCell>
+                                                <ProductImageBox>
+                                                    <img src={product.images[0]} alt=""/>
+                                                </ProductImageBox>
+                                                {product.title}
+                                            </ProductInfoCell>
                                             <td>
                                                 <Button
                                                     onClick={() => lessOfThisProduct(product._id)}>-</Button>
@@ -220,14 +216,14 @@ export default function CartPage() {
                                     </tr>
                                     <tr className="subtotal">
                                         <td colSpan={2}>Shipping</td>
-                                        <td>${shippingFee.data}</td>
+                                        <td>${shippingFee}</td>
                                     </tr>
                                     <tr className="subtotal total">
                                         <td colSpan={2}>Total</td>
                                         <td>${productsTotal + parseInt(shippingFee || 0)}</td>
                                     </tr>
                                     </tbody>
-                                 </Table>
+                                </Table>
                             )}
                         </Box>
                     </RevealWrapper>
