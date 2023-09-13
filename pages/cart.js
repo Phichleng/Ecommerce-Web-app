@@ -189,6 +189,7 @@ export default function CartPage() {
                                     </thead>
                                     <tbody>
                                     {products.map(product => (
+                                        // eslint-disable-next-line react/jsx-key
                                         <tr>
                                             <ProductInfoCell>
                                                 <ProductImageBox>
@@ -220,7 +221,7 @@ export default function CartPage() {
                                     </tr>
                                     <tr className="subtotal total">
                                         <td colSpan={2}>Total</td>
-                                        <td>${productsTotal + parseInt(shippingFee || 0)}</td>
+                                        <td>${productsTotal + parseInt(shippingFee?.length || 0)}</td>
                                     </tr>
                                     </tbody>
                                 </Table>

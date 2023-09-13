@@ -9,6 +9,7 @@ import {RevealWrapper} from "next-reveal";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/pages/api/auth/[...nextauth]";
 import {WishedProduct} from "@/models/WishedProduct";
+import {mongooseConnect} from "@/lib/mongoose";
 
 const CategoryGrid = styled.div`
   display: grid;
@@ -75,7 +76,6 @@ export default function CategoriesPage({mainCategories,categoriesProducts,wished
                             <RevealWrapper delay={categoriesProducts[cat._id].length*50}>
                                 <ShowAllSquare href={'/category/'+cat._id}>Show all &rarr;</ShowAllSquare>
                             </RevealWrapper>
-
                         </CategoryGrid>
                     </CategoryWrapper>
                 ))}
@@ -85,13 +85,14 @@ export default function CategoriesPage({mainCategories,categoriesProducts,wished
 }
 
 export async function getServerSideProps(ctx){
+    await mongooseConnect();
     const categories = await Category.find();
     const mainCategories = categories.filter(c => !c.parent);
     const categoriesProducts = {}; // catId => [products]
     const allFetchedProductsId = [];
     for (const mainCat of mainCategories) {
         const mainCatId = mainCat._id.toString();
-        const childCatIds = categories.filter(c => c?.parent?.toString() === mainCat).map(c => c._id.toString());
+        const childCatIds = categories.filter(c => c?.parent?.toString() === mainCatId).map(c => c._id.toString());
         const categoriesIds = [mainCatId, ...childCatIds];
         const products = await Product.find({category: categoriesIds}, null, {limit:3,sort:{'_id':-1}});
         allFetchedProductsId.push(...products.map(p => p._id.toString()))
