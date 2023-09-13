@@ -117,6 +117,7 @@ export default function CartPage() {
         axios.get('/api/settings?name=shippingFee').then(res => {
             setShippingFee(res.data.value);
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     useEffect(() => {
         if (!session) {
