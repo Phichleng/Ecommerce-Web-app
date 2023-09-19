@@ -10,7 +10,6 @@ import {Setting} from "@/models/Setting";
 
 
 export default function HomePage({featuredProduct,newProducts,wishedNewProducts}){
-
     return(
         <div>
             <Header />

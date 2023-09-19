@@ -218,7 +218,7 @@ export default function CartPage() {
                                     </tr>
                                     <tr className="subtotal">
                                         <td colSpan={2}>Shipping</td>
-                                        <td>${shippingFee}</td>
+                                        <td>${shippingFee.length}</td>
                                     </tr>
                                     <tr className="subtotal total">
                                         <td colSpan={2}>Total</td>
