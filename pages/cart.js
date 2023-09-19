@@ -95,7 +95,7 @@ export default function CartPage() {
     const [streetAddress,setStreetAddress] = useState('');
     const [country,setCountry] = useState('');
     const [isSuccess,setIsSuccess] = useState(false);
-    const [shippingFee, setShippingFee] = useState(null);
+    const [shippingFee, setShippingFee] = useState([null]);
     useEffect(() => {
         if (cartProducts.length > 0) {
             axios.post('/api/cart', {ids:cartProducts})
@@ -218,11 +218,11 @@ export default function CartPage() {
                                     </tr>
                                     <tr className="subtotal">
                                         <td colSpan={2}>Shipping</td>
-                                        <td>${shippingFee.length}</td>
+                                        <td>${shippingFee}</td>
                                     </tr>
                                     <tr className="subtotal total">
                                         <td colSpan={2}>Total</td>
-                                        <td>${productsTotal + parseInt(shippingFee?.length || 0)}</td>
+                                        <td>${productsTotal + parseInt(shippingFee || 0)}</td>
                                     </tr>
                                     </tbody>
                                 </Table>
