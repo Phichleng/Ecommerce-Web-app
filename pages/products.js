@@ -24,7 +24,7 @@ export default function ProductsPage({products,wishedProducts}) {
 
 export async function getServerSideProps(ctx) {
     await mongooseConnect();
-    const products = await Product.find({}, null, {sort:{'_id':-1}});
+    const products = await Product.find({stock: {$gt: 0}}, null, {sort:{'_id':-1}});
     const session = await getServerSession(ctx.req, ctx.res, authOptions);
     const wishedProducts = session?.user
         ? await WishedProduct.find({

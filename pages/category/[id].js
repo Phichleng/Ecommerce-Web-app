@@ -131,7 +131,7 @@ export async function getServerSideProps(context) {
     const category = await Category.findById(context.query.id);
     const subCategories = await Category.find({parent:category._id});
     const catIds = [category._id, ...subCategories.map(c => c._id)];
-    const products = await Product.find({category:catIds});
+    const products = await Product.find({category:catIds, stock: {$gt: 0}});
     return {
         props: {
             category: JSON.parse(JSON.stringify(category)),

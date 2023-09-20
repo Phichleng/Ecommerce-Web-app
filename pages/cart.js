@@ -112,7 +112,7 @@ export default function CartPage() {
         }
         if (window?.location.href.includes('success')) {
             setIsSuccess(true);
-            clearCart();
+
         }
         axios.get('/api/settings?name=shippingFee').then(res => {
             setShippingFee(res.data.value);
@@ -145,7 +145,9 @@ export default function CartPage() {
         });
         if (response.data.url) {
             window.location = response.data.url;
+            clearCart();
         }
+
     }
     let productsTotal = 0;
     for (const productId of cartProducts) {

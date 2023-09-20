@@ -77,7 +77,7 @@ const WishlistButton = styled.button`
   }
 `;
 
-export default function ProductBox({_id,title,description,price,images,wished=false, onRemoveFromWishlist =()=>{},}) {
+export default function ProductBox({_id,title,description,price,images,wished=false, onRemoveFromWishlist = _id=>{},}) {
     const url = '/product/'+_id;
     const [isWished,setIsWished] = useState(wished);
     function addToWishlist(ev) {

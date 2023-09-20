@@ -40,7 +40,7 @@ export default function SingleOrder({line_items,createdAt, ...rest}) {
                     // eslint-disable-next-line react/jsx-key
                     <ProductRow>
                         <span>{item.quantity} X </span>
-                        {item.price_data.product_data.name}
+                        {JSON.stringify(item.price_data.product_data.name)}
                     </ProductRow>
                 ))}
             </div>

@@ -94,7 +94,7 @@ export async function getServerSideProps(ctx){
         const mainCatId = mainCat._id.toString();
         const childCatIds = categories.filter(c => c?.parent?.toString() === mainCatId).map(c => c._id.toString());
         const categoriesIds = [mainCatId, ...childCatIds];
-        const products = await Product.find({category: categoriesIds}, null, {limit:3,sort:{'_id':-1}});
+        const products = await Product.find({category: categoriesIds ,stock : {$gt: 0}}, null, {limit:3,sort:{'_id':-1}});
         allFetchedProductsId.push(...products.map(p => p._id.toString()))
         categoriesProducts[mainCat._id] = products;
     }
