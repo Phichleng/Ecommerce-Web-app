@@ -28,9 +28,11 @@ export default async function handler(req,res) {
         const productInfo = productsInfos.find(p => p._id.toString() === productId);
         const quantity = productsIds.filter(id => id === productId)?.length || 0;
         if (quantity > 0 && productInfo) {
-            await Product.findByIdAndUpdate(productId,{
-                stock: productInfo.stock - quantity
-            })
+            if (productInfo.stock > 0){
+                await Product.findByIdAndUpdate(productId,{
+                    stock: productInfo.stock - quantity
+                })
+            }
             line_items.push({
                 quantity,
                 price_data: {
@@ -44,7 +46,7 @@ export default async function handler(req,res) {
     const session = await getServerSession(req,res,authOptions);
 
     const orderDoc = await Order.create({
-        line_items,name,email,city,postalCode,streetAddress,country,paid:false,
+        line_items,name,email,city,postalCode,streetAddress,country,paid:true,
         userEmail: session?.user?.email,
     });
 
