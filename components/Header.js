@@ -110,6 +110,7 @@ export default function Header() {
                             <BarsIcon />
                         </NavButton>
                     </SideIcons>
+                    <NavLink href={'/'}>Contact: 061 666 888</NavLink>
                 </Wrapper>
             </Center>
         </StyledHeader>

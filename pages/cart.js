@@ -95,7 +95,7 @@ export default function CartPage() {
     const [streetAddress,setStreetAddress] = useState('');
     const [country,setCountry] = useState('');
     const [isSuccess,setIsSuccess] = useState(false);
-    const [shippingFee, setShippingFee] = useState([null]);
+    const [shippingFee, setShippingFee] = useState([]);
     useEffect(() => {
         if (cartProducts.length > 0) {
             axios.post('/api/cart', {ids:cartProducts})
