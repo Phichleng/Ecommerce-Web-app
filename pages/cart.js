@@ -93,7 +93,7 @@ export default function CartPage() {
     const [city,setCity] = useState('');
     const [postalCode,setPostalCode] = useState('');
     const [streetAddress,setStreetAddress] = useState('');
-    const [country,setCountry] = useState('');
+    const [province,setProvince] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [isSuccess,setIsSuccess] = useState(false);
     const [shippingFee, setShippingFee] = useState([]);
@@ -130,7 +130,7 @@ export default function CartPage() {
             setCity(response.data.city);
             setPostalCode(response.data.postalCode);
             setStreetAddress(response.data.streetAddress);
-            setCountry(response.data.country);
+            setProvince(response.data.province);
             setPhoneNumber(response.data.phoneNumber);
         });
     }, [session]);
@@ -142,7 +142,7 @@ export default function CartPage() {
     }
     async function goToPayment() {
         const response = await axios.post('/api/checkout', {
-            name,email,city,postalCode,streetAddress,country,phoneNumber,
+            name,email,city,postalCode,streetAddress,province,phoneNumber,
             cartProducts,
         });
         if (response.data.url) {
@@ -265,14 +265,14 @@ export default function CartPage() {
                                        name="streetAddress"
                                        onChange={ev => setStreetAddress(ev.target.value)}/>
                                 <Input type="text"
-                                       placeholder="Country"
-                                       value={country}
-                                       name="country"
-                                       onChange={ev => setCountry(ev.target.value)}/>
+                                       placeholder="Province"
+                                       value={province}
+                                       name="province"
+                                       onChange={ev => setProvince(ev.target.value)}/>
                                 <Input type="number"
-                                       placeholder="PhoneNumber"
+                                       placeholder="Phone Number"
                                        value={phoneNumber}
-                                       name="phoneNumber"
+                                       name="phone Number"
                                        onChange={ev => setPhoneNumber(ev.target.value)}/>
                                 <Button black block
                                         onClick={goToPayment}>

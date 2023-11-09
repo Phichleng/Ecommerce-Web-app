@@ -42,7 +42,7 @@ export default function AccountPage() {
     const [city,setCity] = useState('');
     const [postalCode,setPostalCode] = useState('');
     const [streetAddress,setStreetAddress] = useState('');
-    const [country,setCountry] = useState('');
+    const [province,setProvince] = useState('');
     const [phoneNumber,setPhoneNumber] = useState('');
     const [addressLoaded,setAddressLoaded] = useState(true);
     const [wishlistLoaded,setWishlistLoaded] = useState(true);
@@ -60,7 +60,7 @@ export default function AccountPage() {
     }
 
     function saveAddress() {
-        const data = {name,email,city,streetAddress,postalCode,country,phoneNumber};
+        const data = {name,email,city,streetAddress,postalCode,province,phoneNumber};
         axios.put('/api/address', data);
     }
 
@@ -77,7 +77,7 @@ export default function AccountPage() {
                 setCity(response.data?.city);
                 setPostalCode(response.data?.postalCode);
                 setStreetAddress(response.data?.streetAddress);
-                setCountry(response.data?.country);
+                setProvince(response.data?.province);
                 setPhoneNumber(response.data?.phoneNumber);
                 setAddressLoaded(true);
             });
@@ -192,14 +192,14 @@ export default function AccountPage() {
                                                name="streetAddress"
                                                onChange={ev => setStreetAddress(ev.target.value)}/>
                                         <Input type="text"
-                                               placeholder="Country"
-                                               value={country}
-                                               name="country"
-                                               onChange={ev => setCountry(ev.target.value)}/>
+                                               placeholder="Province"
+                                               value={province}
+                                               name="province"
+                                               onChange={ev => setProvince(ev.target.value)}/>
                                         <Input type="number"
-                                               placeholder="PhoneNumber"
+                                               placeholder="Phone Number"
                                                value={phoneNumber}
-                                               name="PhoneNumber"
+                                               name="phoneNumber"
                                                onChange={ev => setPhoneNumber(ev.target.value)}/>
                                         <Button black block onClick={saveAddress}>Save</Button>
                                         <hr/>
