@@ -43,6 +43,7 @@ export default function AccountPage() {
     const [postalCode,setPostalCode] = useState('');
     const [streetAddress,setStreetAddress] = useState('');
     const [country,setCountry] = useState('');
+    const [phoneNumber,setPhoneNumber] = useState('');
     const [addressLoaded,setAddressLoaded] = useState(true);
     const [wishlistLoaded,setWishlistLoaded] = useState(true);
     const [orderLoaded,setOrderLoaded] = useState(true);
@@ -59,7 +60,7 @@ export default function AccountPage() {
     }
 
     function saveAddress() {
-        const data = {name,email,city,streetAddress,postalCode,country};
+        const data = {name,email,city,streetAddress,postalCode,country,phoneNumber};
         axios.put('/api/address', data);
     }
 
@@ -77,6 +78,7 @@ export default function AccountPage() {
                 setPostalCode(response.data?.postalCode);
                 setStreetAddress(response.data?.streetAddress);
                 setCountry(response.data?.country);
+                setPhoneNumber(response.data?.phoneNumber);
                 setAddressLoaded(true);
             });
             axios.get('/api/wishlist').then(response => {
@@ -194,6 +196,11 @@ export default function AccountPage() {
                                                value={country}
                                                name="country"
                                                onChange={ev => setCountry(ev.target.value)}/>
+                                        <Input type="number"
+                                               placeholder="PhoneNumber"
+                                               value={phoneNumber}
+                                               name="PhoneNumber"
+                                               onChange={ev => setPhoneNumber(ev.target.value)}/>
                                         <Button black block onClick={saveAddress}>Save</Button>
                                         <hr/>
                                     </>

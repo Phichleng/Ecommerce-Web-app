@@ -14,7 +14,7 @@ export default async function handler(req,res) {
     }
     const {
         name,email,city,
-        postalCode,streetAddress,country,
+        postalCode,streetAddress,country,phoneNumber,
         cartProducts,
     } = req.body;
     await mongooseConnect();
@@ -46,7 +46,7 @@ export default async function handler(req,res) {
     const session = await getServerSession(req,res,authOptions);
 
     const orderDoc = await Order.create({
-        line_items,name,email,city,postalCode,streetAddress,country,paid:true,
+        line_items,name,email,city,postalCode,streetAddress,country,phoneNumber,paid:true,
         userEmail: session?.user?.email,
     });
 

@@ -94,6 +94,7 @@ export default function CartPage() {
     const [postalCode,setPostalCode] = useState('');
     const [streetAddress,setStreetAddress] = useState('');
     const [country,setCountry] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [isSuccess,setIsSuccess] = useState(false);
     const [shippingFee, setShippingFee] = useState([]);
     useEffect(() => {
@@ -130,6 +131,7 @@ export default function CartPage() {
             setPostalCode(response.data.postalCode);
             setStreetAddress(response.data.streetAddress);
             setCountry(response.data.country);
+            setPhoneNumber(response.data.phoneNumber);
         });
     }, [session]);
     function moreOfThisProduct(id) {
@@ -140,7 +142,7 @@ export default function CartPage() {
     }
     async function goToPayment() {
         const response = await axios.post('/api/checkout', {
-            name,email,city,postalCode,streetAddress,country,
+            name,email,city,postalCode,streetAddress,country,phoneNumber,
             cartProducts,
         });
         if (response.data.url) {
@@ -267,6 +269,11 @@ export default function CartPage() {
                                        value={country}
                                        name="country"
                                        onChange={ev => setCountry(ev.target.value)}/>
+                                <Input type="number"
+                                       placeholder="PhoneNumber"
+                                       value={phoneNumber}
+                                       name="phoneNumber"
+                                       onChange={ev => setPhoneNumber(ev.target.value)}/>
                                 <Button black block
                                         onClick={goToPayment}>
                                     Continue to payment
