@@ -4,6 +4,8 @@ import {Order} from "@/models/Order";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/pages/api/auth/[...nextauth]";
 import {Setting} from "@/models/Setting";
+import {withSwal} from "react-sweetalert2";
+import Swal from "sweetalert2";
 
 
 const stripe = require('stripe')(process.env.STRIPE_SK);
@@ -29,9 +31,15 @@ export default async function handler(req,res) {
         const quantity = productsIds.filter(id => id === productId)?.length || 0;
         if (quantity > 0 && productInfo) {
             if (productInfo.stock > 0){
-                await Product.findByIdAndUpdate(productId,{
-                    stock: productInfo.stock - quantity
-                })
+                if (quantity > productInfo.stock){
+                    res.json('Out of Stock')
+                    return;
+                }
+                else{
+                    await Product.findByIdAndUpdate(productId,{
+                        stock: productInfo.stock - quantity
+                    })
+                }
             }
             line_items.push({
                 quantity,

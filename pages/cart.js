@@ -145,6 +145,10 @@ export default function CartPage() {
             name,email,city,postalCode,streetAddress,province,phoneNumber,
             cartProducts,
         });
+        if (response.data === "Out of Stock"){
+            alert('ក្នុងស្ដុកមិនគ្រប់គ្រាន់')
+            return;
+        }
         if (response.data.url) {
             window.location = response.data.url;
             clearCart();
