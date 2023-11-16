@@ -4,8 +4,6 @@ import {Order} from "@/models/Order";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/pages/api/auth/[...nextauth]";
 import {Setting} from "@/models/Setting";
-import {withSwal} from "react-sweetalert2";
-import Swal from "sweetalert2";
 
 
 const stripe = require('stripe')(process.env.STRIPE_SK);

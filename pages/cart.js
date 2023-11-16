@@ -9,6 +9,7 @@ import Table from "@/components/Table";
 import Input from "@/components/Input";
 import {RevealWrapper} from "next-reveal";
 import {useSession} from "next-auth/react";
+import Swal from "sweetalert2";
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -146,7 +147,7 @@ export default function CartPage() {
             cartProducts,
         });
         if (response.data === "Out of Stock"){
-            alert('ក្នុងស្ដុកមិនគ្រប់គ្រាន់')
+            Swal.fire("ក្នុងស្ដុកមិនមានគ្រប់គ្រាន់");
             return;
         }
         if (response.data.url) {
